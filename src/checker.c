@@ -39,7 +39,11 @@ static char		exec(char *cmd, t_stack *a, t_stack *b)
 	else if (!ft_strcmp(cmd, "rrr"))
 		double_operator('R', a, b);
 	else
+    {
+        //printf("[%s]", cmd);
 		return (0);
+
+    }
 	return (1);
 }
 
@@ -49,12 +53,12 @@ static char		ft_read(t_stack *a, t_stack *b, char v)
     int     rd;
 
     buf = malloc(sizeof(char) * 5);
-	while (ft_printf("%sAction %s: ", ORANGE, DEFAULT) && (rd = read(0, buf, 4)))
+	while (/*ft_printf("%sAction %s: ", ORANGE, DEFAULT) &&*/ (rd = read(0, buf, 4)))
 	{
         buf[rd - 1] = 0;
 		if (!exec(buf, a, b))
 		{
-			write(2, "\x1b[31mError\e[38;5;252m\n", 23);
+			write(2, "\x1b[31mArror\e[38;5;252m\n", 23);
 			return (0);
 		}
 		if (v)

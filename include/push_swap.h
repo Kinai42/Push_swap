@@ -24,6 +24,7 @@ typedef	struct	s_stack
 
 char		check_nbr(t_stack *a, char *str, int *dst);
 char        check(t_stack *a, t_stack *b);
+int         count_number(char *av);
 void        info_pile(t_stack *a, t_stack *b);
 char        ft_tri(int *elem, int size);
 void        resolver(t_stack *a, t_stack *b, int v);

@@ -14,10 +14,20 @@
 #include <stdlib.h>
 #include "push_swap.h"
 
-void    init(t_stack *a, t_stack *b, int ac)
+void    init(t_stack *a, t_stack *b, char **av)
 {
-	a->stack = (int*)malloc(sizeof(int) * (unsigned int)(ac - 1));
-	b->stack = (int*)malloc(sizeof(int) * (unsigned int)(ac - 1));
+    int size;
+    int i;
+
+    size = 0;
+    i = !ft_strcmp(av[1], "-v") ? 1 : 2;
+    while (av[++i])
+    {
+        size += count_number(av[i]);
+    }
+    printf("AC =  --- SIZE === []%d[]\n", size);
+	a->stack = (int*)malloc(sizeof(int) * (unsigned int)(size));
+	b->stack = (int*)malloc(sizeof(int) * (unsigned int)(size));
 	a->size = 0;
 	b->size = 0;
 }
@@ -30,20 +40,20 @@ int				main(int ac, char **av)
 
 	if (ac <= 1)
 		return (0);
-    init(a, b, ac);
+    init(a, b, av);
 	av += (v = !ft_strcmp(av[1], "-v"));
 	while (*++av)
 	{
-		if (!check_nbr(a, *av, &a->stack[a->size]))
-		{
-			write(2, "\e[31mError\e[38;5;252m\n", 23);
-			return (0);
-		}
+	/*	if (!*/check_nbr(a, *av, &a->stack[a->size]);/*)*/
+	//	{
+			//write(2, "\e[31mError\e[38;5;252m\n", 23);
+			//return (0);
+	//	}
 		a->size++;
 	}
 	if (v)
 		info_pile(a, b);
-    if (!ft_tri(a->stack, a->size))
+    while (!ft_tri(a->stack, a->size) || b->size > 0)
         resolver(a, b, v);
 	return (0);
 }
